@@ -14,16 +14,16 @@ struct ContentView: View {
     var body: some View {
         VStack {
             TabView(selection: $activeTab){
-                Text("Recent")
+                Recents()
                     .tag(Tab.recent)
                     .tabItem { Tab.recent.tab}
-                Text("Search")
+                Search()
                     .tag(Tab.recent)
                     .tabItem { Tab.search.tab}
-                Text("Chart")
+                Graphs()
                     .tag(Tab.recent)
                     .tabItem { Tab.chart.tab}
-                Text("Settings")
+               Settings()
                     .tag(Tab.recent)
                     .tabItem { Tab.settings.tab}
             }
