@@ -1,7 +1,8 @@
 import SwiftUI
-
 struct Recents: View {
     @AppStorage ("userName") private var userName: String = ""
+    @State private var startDate :Date = .now.startOfMonth
+    @State private var endDate :Date = .now.endOfMonth
     var body: some View {
         GeometryReader{
             let size = $0.size
@@ -9,7 +10,15 @@ struct Recents: View {
                 ScrollView(.vertical){
                     LazyVStack(spacing: 10, pinnedViews: [.sectionHeaders] ){
                         Section{
-                            Text("Recent")
+                            Button (
+                            action: {}
+                           ,label: {
+                                Text("\(format(date: startDate, format: "dd-MMM-yyyy")) - \(format(date: endDate, format: "dd-MMM-yyyy"))")
+                                    .font(.caption2)
+                                    .foregroundStyle(.gray)
+                            })
+                            .hSpacing(.leading)
+                            CardView(income: 2039, expense: 4099)
                         } header:{
                             HeaderView(size)
                         }
@@ -17,6 +26,7 @@ struct Recents: View {
                     .padding(15)
                 }
             }
+            .background(.gray.opacity(0.15))
         }
     }
     @ViewBuilder
@@ -47,7 +57,6 @@ struct Recents: View {
                         .contentShape(.circle)
                 }
         }
-
         .padding(.bottom, userName.isEmpty ? 10 : 5)
         .background{
             VStack(spacing:0){
@@ -77,7 +86,6 @@ struct Recents: View {
         return scale + 1
     }
 }
-
 #Preview {
     ContentView()
 }
